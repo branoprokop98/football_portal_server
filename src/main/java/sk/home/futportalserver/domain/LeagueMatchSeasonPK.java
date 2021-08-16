@@ -6,9 +6,10 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class LeagueMatchPK implements Serializable {
+public class LeagueMatchSeasonPK implements Serializable {
     private Long leagueId;
     private Long matchId;
+    private Long seasonId;
 
     public Long getLeagueId() {
         return leagueId;
@@ -24,5 +25,13 @@ public class LeagueMatchPK implements Serializable {
 
     public void setMatchId(Long matchId) {
         this.matchId = matchId;
+    }
+
+    public Long getSeasonId() {
+        return seasonId;
+    }
+
+    public void setSeasonId(Long seasonId) {
+        this.seasonId = seasonId;
     }
 }

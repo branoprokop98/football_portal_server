@@ -8,7 +8,6 @@ import sk.home.futportalserver.services.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class FutPortalServerApplication implements CommandLineRunner {
@@ -17,14 +16,14 @@ public class FutPortalServerApplication implements CommandLineRunner {
     private final SeasonService seasonService;
     private final MatchService matchService;
     private final TeamService teamService;
-    private final LeagueMatchService leagueMatchService;
+    private final LeagueMatchSeasonService leagueMatchSeasonService;
 
-    public FutPortalServerApplication(LeagueService leagueService, SeasonService seasonService, MatchService matchService, TeamService teamService, LeagueMatchService leagueMatchService) {
+    public FutPortalServerApplication(LeagueService leagueService, SeasonService seasonService, MatchService matchService, TeamService teamService, LeagueMatchSeasonService leagueMatchSeasonService) {
         this.leagueService = leagueService;
         this.seasonService = seasonService;
         this.matchService = matchService;
         this.teamService = teamService;
-        this.leagueMatchService = leagueMatchService;
+        this.leagueMatchSeasonService = leagueMatchSeasonService;
     }
 
     public static void main(String[] args) {
@@ -61,8 +60,8 @@ public class FutPortalServerApplication implements CommandLineRunner {
 //        team3.getHomeMatches().add(match2);
 //        team4.getGuestMatches().add(match2);
 
-        LeagueMatch leagueMatch1 = new LeagueMatch(league1, 1, match1);
-        LeagueMatch leagueMatch2 = new LeagueMatch(league1, 1, match2);
+        LeagueMatchSeason leagueMatchSeason1 = new LeagueMatchSeason(league1, 1, match1, season1);
+        LeagueMatchSeason leagueMatchSeason2 = new LeagueMatchSeason(league1, 1, match2, season1);
 
         teamService.saveTeam(team1);
         teamService.saveTeam(team2);
@@ -72,8 +71,8 @@ public class FutPortalServerApplication implements CommandLineRunner {
         matchService.saveMatch(match1);
         matchService.saveMatch(match2);
 
-        leagueMatchService.saveLeagueMatch(leagueMatch1);
-        leagueMatchService.saveLeagueMatch(leagueMatch2);
+        leagueMatchSeasonService.saveLeagueMatch(leagueMatchSeason1);
+        leagueMatchSeasonService.saveLeagueMatch(leagueMatchSeason2);
 
 //        List<Integer> leagueMatches = leagueMatchService.getAllRounds(1L);
 //        List<Integer> leagueMatches2 = leagueMatchService.getAllRounds(2L);

@@ -4,15 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Getter
 @Setter
-public class LeagueMatch {
+public class LeagueMatchSeason {
 
     @EmbeddedId
-    private LeagueMatchPK id;
+    private LeagueMatchSeasonPK id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("leagueId")
@@ -21,20 +20,29 @@ public class LeagueMatch {
 
     private Integer round;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @MapsId("matchId")
+//    @JoinColumn(name = "matchid")
+    @OneToOne(orphanRemoval = true)
     @MapsId("matchId")
-    @JoinColumn(name = "matchid")
+    @JoinColumn(name = "match_id")
     private Match match;
 
-    public LeagueMatch() {
-        this.id = new LeagueMatchPK();
+    @ManyToOne
+    @MapsId("seasonId")
+    @JoinColumn(name = "season_id")
+    private Season season;
+
+    public LeagueMatchSeason() {
+        this.id = new LeagueMatchSeasonPK();
     }
 
-    public LeagueMatch(League league, Integer round, Match match) {
-        this.id = new LeagueMatchPK();
+    public LeagueMatchSeason(League league, Integer round, Match match, Season season) {
+        this.id = new LeagueMatchSeasonPK();
         this.league = league;
         this.round = round;
         this.match = match;
+        this.season = season;
     }
 
     public void setMatch(Match match) {
@@ -53,11 +61,11 @@ public class LeagueMatch {
         return league;
     }
 
-    public LeagueMatchPK getId() {
+    public LeagueMatchSeasonPK getId() {
         return id;
     }
 
-    public void setId(LeagueMatchPK id) {
+    public void setId(LeagueMatchSeasonPK id) {
         this.id = id;
     }
 
@@ -67,5 +75,13 @@ public class LeagueMatch {
 
     public void setRound(Integer round) {
         this.round = round;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
     }
 }
