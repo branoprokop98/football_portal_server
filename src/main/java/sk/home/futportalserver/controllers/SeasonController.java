@@ -27,4 +27,9 @@ public class SeasonController {
     public ResponseEntity<Season> getSeasonById(@PathVariable Long id){
         return ResponseEntity.ok().body(seasonService.findSeasonById(id));
     }
+
+    @GetMapping("getAllSeasonWhereIsLeague/{nameOfLeague}")
+    public ResponseEntity<List<Season>> getAllSeasonsWhereIsLeague(@PathVariable String nameOfLeague){
+        return ResponseEntity.ok().body(seasonService.findAllSeasonWhichContainsLeagueByName(nameOfLeague));
+    }
 }
