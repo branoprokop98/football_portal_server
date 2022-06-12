@@ -12,4 +12,10 @@ import java.util.List;
 public interface SeasonRepository extends JpaRepository<Season, Long> {
 
     Season findSeasonById(Long id);
+
+    @Query(value = "select s from Season s inner join s.leagues d where d.name = ?1")
+    List<Season> findAllSeasonWhichContainsLeagueByName(String nameOfLeague);
+
+    @Query(value = "select d.id from Season s inner join s.leagues d where d.name = ?1 and s.year = ?2")
+    Integer getLeagueIdByLeagueNameAndYear(String nameOfLeague, String seasonYear);
 }
