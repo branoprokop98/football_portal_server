@@ -31,5 +31,9 @@ public class LeagueService {
         return leagueRepository.getLeaguesBySeasonId(id);
     }
 
+    public League getLeagueById(Long id){
+        return leagueRepository.findLeagueById(id);
+    }
+
 
 }
