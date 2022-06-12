@@ -34,6 +34,10 @@ public class LeagueMatchSeasonService {
         return leagueMatchSeasonRepository.findDistinctByRound(leagueId);
     }
 
+    public Integer getLatestRound(Long leagueId){
+        return leagueMatchSeasonRepository.getNewestRound(leagueId);
+    }
+
     public List<LeagueMatchSeason> getAllMatchesInLeagueInSeasonByRound(Long leagueId, Long seasonId, Integer round) {
         return leagueMatchSeasonRepository.findAllByLeagueIdAndSeasonIdAndRound(leagueId, seasonId, round);
     }
