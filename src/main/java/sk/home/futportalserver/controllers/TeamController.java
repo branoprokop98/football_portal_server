@@ -1,5 +1,6 @@
 package sk.home.futportalserver.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.home.futportalserver.domain.Team;
 import sk.home.futportalserver.services.TeamService;
@@ -19,12 +20,12 @@ public class TeamController {
 
 
     @GetMapping("/getAll")
-    public List<Team> getAllTeams(){
-        return teamService.getAllTeams();
+    public ResponseEntity<List<Team>> getAllTeams(){
+        return ResponseEntity.ok().body(teamService.getAllTeams());
     }
 
     @GetMapping("/getTeamsByLeagueId/{id}")
-    public List<Team> getTeamsByLeagueId(@PathVariable Long id){
-        return teamService.getTeamsByLeagueId(id);
+    public ResponseEntity<List<Team>> getTeamsByLeagueId(@PathVariable Long id){
+        return ResponseEntity.ok().body(teamService.getTeamsByLeagueId(id));
     }
 }
