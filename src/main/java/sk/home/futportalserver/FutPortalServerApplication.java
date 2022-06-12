@@ -35,12 +35,14 @@ public class FutPortalServerApplication implements CommandLineRunner {
         League league1 = new League(null, "Východ");
         League league2 = new League(null, "Stred");
         League league3 = new League(null, "Západ");
+        League league1_2 = new League(null, "Východ");
 
         leagueService.saveLeague(league1);
         leagueService.saveLeague(league2);
         leagueService.saveLeague(league3);
+        leagueService.saveLeague(league1_2);
 
-        Season season1 = new Season(null, Arrays.asList(league3), "2019/2020");
+        Season season1 = new Season(null, Arrays.asList(league3, league1_2), "2019/2020");
         Season season2 = new Season(null, Arrays.asList(league1, league2), "2020/2021");
 
         seasonService.saveSeason(season1);
