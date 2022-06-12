@@ -1,5 +1,6 @@
 package sk.home.futportalserver.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.home.futportalserver.domain.LeagueMatchSeason;
 import sk.home.futportalserver.services.LeagueMatchSeasonService;
@@ -17,28 +18,33 @@ public class LeagueMatchSeasonController {
         this.leagueMatchSeasonService = leagueMatchSeasonService;
     }
 
-    @GetMapping("getMatchesByLeague/{id}")
-    public List<LeagueMatchSeason> getMatchesByLeagueId(@PathVariable Long id) {
-        return leagueMatchSeasonService.getAllMatchesByLeagueId(id);
+    @GetMapping("getMatchesInLeague/{leagueId}")
+    public ResponseEntity<List<LeagueMatchSeason>> getMatchesByLeagueId(@PathVariable Long leagueId) {
+        return ResponseEntity.ok().body(leagueMatchSeasonService.getAllMatchesByLeagueId(leagueId));
     }
 
-    @GetMapping("getAllRoundsInLeagues/{id}")
-    public List<Integer> getAllRoundsInLeagues(@PathVariable Long id) {
-        return leagueMatchSeasonService.getAllRounds(id);
+    @GetMapping("getAllRoundsInLeagues/{leagueId}")
+    public ResponseEntity<List<Integer>> getAllRoundsInLeagues(@PathVariable Long leagueId) {
+        return ResponseEntity.ok().body(leagueMatchSeasonService.getAllRounds(leagueId));
     }
 
     @GetMapping("matchesByLeagueAndRound/{leagueId}/{round}")
-    public List<LeagueMatchSeason> getMatchesByLeagueAndRound(@PathVariable Long leagueId, @PathVariable Integer round) {
-        return leagueMatchSeasonService.getAllMatchesByLeagueIdAndRound(leagueId, round);
+    public ResponseEntity<List<LeagueMatchSeason>> getMatchesByLeagueAndRound(@PathVariable Long leagueId, @PathVariable Integer round) {
+        return ResponseEntity.ok().body(leagueMatchSeasonService.getAllMatchesByLeagueIdAndRound(leagueId, round));
     }
 
     @GetMapping("latestMatchesInLeague/{id}")
-    public List<LeagueMatchSeason> getLatestMatchesInLeague(@PathVariable Long id) {
-        return leagueMatchSeasonService.getLatestMatchesInLeague(id);
+    public ResponseEntity<List<LeagueMatchSeason>> getLatestMatchesInLeague(@PathVariable Long id) {
+        return ResponseEntity.ok().body(leagueMatchSeasonService.getLatestMatchesInLeague(id));
     }
 
     @GetMapping("matchesInLeagueAndSeasonByRound/{leagueId}/{seasonId}/{round}")
-    public List<LeagueMatchSeason> getAllMatchesByRoundInLeagueInSeason(@PathVariable Long leagueId, @PathVariable Long seasonId, @PathVariable Integer round) {
-        return leagueMatchSeasonService.getAllMatchesInLeagueInSeasonByRound(leagueId, seasonId, round);
+    public ResponseEntity<List<LeagueMatchSeason>> getAllMatchesByRoundInLeagueInSeason(@PathVariable Long leagueId, @PathVariable Long seasonId, @PathVariable Integer round) {
+        return ResponseEntity.ok().body(leagueMatchSeasonService.getAllMatchesInLeagueInSeasonByRound(leagueId, seasonId, round));
+    }
+
+    @GetMapping("/getLatestRound/{leagueId}")
+    public ResponseEntity<String> getLatestRound(@PathVariable Long leagueId) {
+        return ResponseEntity.ok().body(leagueMatchSeasonService.getLatestRound(leagueId).toString());
     }
 }
