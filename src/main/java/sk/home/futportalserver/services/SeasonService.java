@@ -25,4 +25,12 @@ public class SeasonService {
     public Season findSeasonById(Long id){
         return seasonRepository.findSeasonById(id);
     }
+
+    public List<Season> findAllSeasonWhichContainsLeagueByName(String nameOfLeague){
+        return seasonRepository.findAllSeasonWhichContainsLeagueByName(nameOfLeague);
+    }
+
+    public Integer getLeagueIdBySeasonYearAndLeagueName(String nameOfLeague, String seasonYear){
+        return seasonRepository.getLeagueIdByLeagueNameAndYear(nameOfLeague, seasonYear);
+    }
 }
